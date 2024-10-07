@@ -1,0 +1,33 @@
+##
+# Build Systems
+#
+
+# Gradle:
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+##
+# IDEs
+#
+
+# IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+
+##
+# Project Structure
+#
+
+# local environment configuration:
+.env
+.envrc
+
+# working directory
+working/
+
