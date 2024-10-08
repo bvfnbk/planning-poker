@@ -2,4 +2,4 @@
 
 ## 0.1.0
 
-- #1: Created "Frontend" application module.
+- #1 Created "Frontend" application module.
