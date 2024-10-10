@@ -1,0 +1,27 @@
+services:
+  planning-poker-frontend:
+    image: planning-poker-frontend:0.1.0
+    hostname: frontend
+    ports:
+      - "9000:80"
+    networks:
+      - planning-poker
+  planning-poker-gateway:
+    image: planning-poker-gateway:0.1.0
+    hostname: gateway
+    command:
+      ##
+      # Providing Traefik configuration via CLI (mixture is not allowed):
+      #
+      - --log.level=DEBUG
+      - --accesslog=true
+      - --entrypoints.web.address=:80
+      - --providers.file.directory=/etc/traefik/services
+    ports:
+      - "8000:80"
+    depends_on:
+      - planning-poker-frontend
+    networks:
+      - planning-poker
+networks:
+  planning-poker: {}
