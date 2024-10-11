@@ -1,0 +1,13 @@
+---
+tcp:
+  routers:
+    signaling-router-tcp:
+      entryPoints:
+        - ws
+      rule: "HostSNI(`*`)"
+      service: signaling-service-tcp
+  services:
+    signaling-service-tcp:
+      loadBalancer:
+        servers:
+          - address: signaling:8080
