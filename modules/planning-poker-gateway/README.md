@@ -1,5 +1,7 @@
 # Planning Poker: Gateway
 
+![](https://img.shields.io/badge/Planning_Poker:Gateway-0.1.0-green)
+
 The _Planning Poker: Gateway_ is a proxy application. Any HTTP connection passes over the gateway. It uses the _Traefik_
 application proxy.
 
