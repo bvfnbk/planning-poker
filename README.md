@@ -1,5 +1,7 @@
 # Planning Poker
 
+![](https://img.shields.io/badge/Planning_Poker-0.1.0-green)
+
 A WebRTC-based, stateless planning poker game. The application consists out of several modules.
 
 ## Modules
@@ -20,7 +22,27 @@ Build all application module container images (including their versions) as desc
 - [modules/planning-poker-frontend/README.md](modules/planning-poker-frontend/README.md)
 - [modules/planning-poker-gateway/README.md](modules/planning-poker-gateway/README.md)
 - [modules/planning-poker-signaling/README.md](modules/planning-poker-signaling/README.md)
--
+
+or use the script
+
+```
+./bin/build_image.sh
+```
+
+which helps with building each module.
+
+```
+Usage: build_image.sh MODULE VERSION
+
+Where:
+    MODULE    : One of
+                    planning-poker-frontend
+                    planning-poker-signaling
+                    planning-poker-gateway
+    VERSION   : The version tag.
+```
+
+which creates the image `MODULE:VERSION` in the local registry.
 
 ### Run
 
