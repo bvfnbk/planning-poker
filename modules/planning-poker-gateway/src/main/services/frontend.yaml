@@ -1,13 +1,13 @@
 ---
 http:
   routers:
-    frontend:
+    frontend-router-http:
       entryPoints:
         - web
       rule: "PathPrefix(`/`)"
-      service: frontend
+      service: frontend-service-http
   services:
-    frontend:
+    frontend-service-http:
       loadBalancer:
         servers:
           - url: "http://frontend/"
