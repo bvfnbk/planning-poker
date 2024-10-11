@@ -6,8 +6,9 @@ A WebRTC-based, stateless planning poker game. The application consists out of s
 
 ## Modules
 
-- `modules/planning-poker-frontend`: The frontend application module.
-- `modules/planning-poker-gateway`: The gateway application module.
+- `modules/frontend`: The frontend application module.
+- `modules/gateway`: The gateway application module.
+- `modules/signaling`: A WebSocket signaling service.
 
 ## Requirements
 
@@ -19,9 +20,9 @@ A WebRTC-based, stateless planning poker game. The application consists out of s
 
 Build all application module container images (including their versions) as described in
 
-- [modules/planning-poker-frontend/README.md](modules/planning-poker-frontend/README.md)
-- [modules/planning-poker-gateway/README.md](modules/planning-poker-gateway/README.md)
-- [modules/planning-poker-signaling/README.md](modules/planning-poker-signaling/README.md)
+- [modules/frontend/README.md](modules/frontend/README.md)
+- [modules/gateway/README.md](modules/gateway/README.md)
+- [modules/signaling/README.md](modules/signaling/README.md)
 
 or use the script
 
@@ -32,17 +33,20 @@ or use the script
 which helps with building each module.
 
 ```
-Usage: build_image.sh MODULE VERSION
+Usage: build.sh MODULE VERSION
 
 Where:
     MODULE    : One of
-                    planning-poker-frontend
-                    planning-poker-signaling
-                    planning-poker-gateway
+                    frontend
+                    signaling
+                    gateway
     VERSION   : The version tag.
 ```
 
-which creates the image `MODULE:VERSION` in the local registry.
+The module name is prefixed with the string `planning-poker-`. Thus, building creates the image 
+`planning-poker-MODULE:VERSION` in the local registry.
+
+Or run `build.sh all VERSION` to build all module images and tag them accordingly.
 
 ### Run
 
@@ -64,12 +68,12 @@ in the project base directory.
 All modules are supposed to be served as container. This section provides an overview over the network configuration
 used by default:
 
-| Service                    | Hostname    | Port (External) | Port (Internal) | Target                             |
-|----------------------------|-------------|-----------------|-----------------|------------------------------------|
-| `planning-poker-gateway`   | `gateway`   | `8000`          | `80`            | Upstream services, e.g. `frontend` |
-|                            |             | `8001`          | `81`            | Websocket                          |
-| `planning-poker-frontend`  | `frontend`  | `8100`          | `80`            | Page                               | 
-| `planning-poker-signaling` | `signaling` | `8200`          | `8080`          | WebSocket                          |
+| Service     | Hostname    | Port (External) | Port (Internal) | Target                             |
+|-------------|-------------|-----------------|-----------------|------------------------------------|
+| `gateway`   | `gateway`   | `8000`          | `80`            | Upstream services, e.g. `frontend` |
+|             |             | `8001`          | `81`            | Websocket                          |
+| `frontend`  | `frontend`  | `8100`          | `80`            | Page                               | 
+| `signaling` | `signaling` | `8200`          | `8080`          | WebSocket                          |
 
 **Please note:** At the moment it is not possible for the gateway to proxy the signaling service behind the same port as
 the other services. The signaling service is a TCP service which is handled _before_ HTTP which effectively disables the
@@ -79,8 +83,8 @@ HTTP route to the frontend.
 
 ```mermaid
 flowchart LR
-  Frontend["<code>planning-poker-frontend</code>"]
-  Gateway["<code>planning-poker-gateway</code>"]
+  Frontend["<code>frontend</code>"]
+  Gateway["<code>gateway</code>"]
   Client
   Client -- :8000 --> Gateway
   Client -- :8100 --> Frontend
@@ -91,8 +95,8 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-  Signaling["<code>planning-poker-signaling</code>"]
-  Gateway["<code>planning-poker-gateway</code>"]
+  Signaling["<code>signaling</code>"]
+  Gateway["<code>gateway</code>"]
   Client
   Client -- :8001 --> Gateway
   Client -- :8200 --> Signaling

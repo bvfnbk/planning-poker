@@ -1,6 +1,6 @@
 services:
   signaling:
-    image: planning-poker-signaling:0.1.0
+    image: planning-poker-signaling:0.2.0
     hostname: signaling
     ports:
       - "8200:8080"
@@ -8,7 +8,7 @@ services:
       - planning-poker
 
   frontend:
-    image: planning-poker-frontend:0.1.0
+    image: planning-poker-frontend:0.2.0
     hostname: frontend
     ports:
       - "8100:80"
@@ -17,7 +17,7 @@ services:
 
 
   gateway:
-    image: planning-poker-gateway:0.1.0
+    image: planning-poker-gateway:0.2.0
     hostname: gateway
     command:
       ##
