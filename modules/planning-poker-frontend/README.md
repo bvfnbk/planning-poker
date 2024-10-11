@@ -1,5 +1,7 @@
 # Planning Poker: Frontend
 
+![](https://img.shields.io/badge/Planning_Poker:Frontend-0.1.0-green)
+
 This is the frontend module of the "Planning Poker" application. It consists out of a static "Hello World" page which is
 built into a container.
 
