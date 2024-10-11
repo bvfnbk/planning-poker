@@ -27,4 +27,4 @@ Build the container and run
 podman run -p 8080:80 planning-poker-frontend:0.1.0
 ```
 
-and visit http://localhost:8080 using the browser of your choice
+and visit http://localhost:8080 using the browser of your choice.

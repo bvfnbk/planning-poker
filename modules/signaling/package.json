@@ -1,5 +1,5 @@
 {
-  "name": "planning-poker-signaling",
+  "name": "signaling",
   "version": "0.1.0",
   "description": "A WebSocket signaling service for the Planning Poker WebRTC application.",
   "main": "src/main/js/index.js",
