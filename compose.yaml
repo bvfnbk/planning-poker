@@ -1,12 +1,22 @@
 services:
-  planning-poker-frontend:
+  signaling:
+    image: planning-poker-signaling:0.1.0
+    hostname: signaling
+    ports:
+      - "8200:8080"
+    networks:
+      - planning-poker
+
+  frontend:
     image: planning-poker-frontend:0.1.0
     hostname: frontend
     ports:
-      - "9000:80"
+      - "8100:80"
     networks:
       - planning-poker
-  planning-poker-gateway:
+
+
+  gateway:
     image: planning-poker-gateway:0.1.0
     hostname: gateway
     command:
@@ -16,12 +26,14 @@ services:
       - --log.level=DEBUG
       - --accesslog=true
       - --entrypoints.web.address=:80
+      - --entrypoints.ws.address=:81
       - --providers.file.directory=/etc/traefik/services
+      - --providers.file.watch=true
     ports:
       - "8000:80"
-    depends_on:
-      - planning-poker-frontend
+      - "8001:81"
     networks:
       - planning-poker
+
 networks:
   planning-poker: {}

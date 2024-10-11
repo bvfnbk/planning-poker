@@ -1,10 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Planning Poker</title>
+  <meta charset="UTF-8">
+  <title>Planning Poker: WebSocket Test</title>
+  <style>
+    textarea#input {
+      font-family: monospace;
+    }
+  </style>
 </head>
 <body>
-<h1>Hello World</h1>
+<label for="input">Messages:</label><br/><textarea id="input" rows="10" cols="70"></textarea>
+<script>
+  const lines = [];
+  const log = document.getElementById('input');
+
+  const scheme = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const host = window.location.hostname
+  const port = parseInt(window.location.port) + 1;
+  const socketUrl = `${scheme}//${host}:${port}`;
+
+  console.log(`Using Socket URL: ${socketUrl}`);
+
+  const socket = new WebSocket(socketUrl);
+
+
+  function updateLog() {
+    log.value = lines.join('\n');
+  }
+
+  function append(line) {
+    lines.push(line);
+    updateLog();
+  }
+
+  function ping() {
+    return {
+      type: 'ping',
+      data: {
+        timestamp: Date.now(),
+      }
+    };
+  }
+
+  function send(obj) {
+    append('>>> ' + obj.type + ' : ' + new Date(obj.data.timestamp).toString());
+    socket.send(JSON.stringify(obj));
+
+  }
+
+  function receive(obj) {
+    // Received PONG
+    append('<<< ' + obj.type + ' : ' + new Date(obj.data.timestamp).toString());
+    setTimeout(() => {
+      // Wait & send PING
+      send(ping());
+    }, 1250);
+  }
+
+
+  socket.onopen = (event) => {
+    console.log("Connection opened;", event);
+    // Start Game: send PING
+    send(ping());
+  };
+
+  socket.onclose = (event) => {
+    console.log("Connection closed;", event);
+  };
+
+  socket.onmessage = (event) => {
+
+    const data = JSON.parse(event.data);
+    if (data.type === 'pong') {
+      receive(data)
+    } else {
+      console.warn("Unknown event:", data);
+    }
+  };
+
+  socket.onerror = (event) => {
+    console.log("Error received", event);
+  };
+</script>
 </body>
 </html>
