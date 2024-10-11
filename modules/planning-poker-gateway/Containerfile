@@ -4,4 +4,6 @@ FROM traefik:v3.1.6
 # Add sources:
 #
 COPY src/main/services/frontend.yaml /etc/traefik/services/frontend.yaml
+COPY src/main/services/signaling.yaml /etc/traefik/services/signaling.yaml
 
+EXPOSE 80 81
