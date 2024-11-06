@@ -1,0 +1,23 @@
+{
+  "name": "api",
+  "version": "0.1.0",
+  "description": "A HTTP service providing REST endpoints to the client(s).",
+  "main": "src/main/js/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/main/js/index.js",
+    "test": "NODE_NO_WARNINGS=1 node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "keywords": [
+    "HTTP",
+    "REST"
+  ],
+  "author": "bvfnbk",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^5.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
