@@ -1,17 +1,20 @@
 #!/usr/bin/env bash
 
 function print_usage {
-    echo "Usage: $(basename $0) MODULE VERSION";
-    echo "";
-    echo "Where:";
-    echo "    MODULE    : One of";
-    echo "                    frontend";
-    echo "                    signaling";
-    echo "                    gateway";
-    echo "    VERSION   : The version tag.";
-    echo "";
-    echo "Note: Use 'all' as module name to build";
-    echo "  all modules (sic).";
+    cat << EOF
+Usage: $(basename $0) MODULE VERSION
+
+Where:
+    MODULE      : One of
+                    api
+                    frontend
+                    signaling
+                    gateway
+    VERSION     : The version tag.
+
+Note: Use 'all' as module name to build
+    all modules.
+EOF
 }
 
 [ $# -eq 2 ] || {
@@ -89,7 +92,7 @@ MODULE_VERSION="$2";
 
 case $MODULE_NAME in
     all)
-        for m in "frontend" "gateway" "signaling"; do
+        for m in "api" "frontend" "gateway" "signaling"; do
             build_image "$CMD" "$MODULES_BASE_DIR" "$IMAGE_PREFIX" "$m" "$MODULE_VERSION";
         done
         ;;
