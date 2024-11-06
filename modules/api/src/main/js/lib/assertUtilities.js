@@ -67,6 +67,20 @@ const isString = (value) => {
 };
 
 /**
+ * Tests given value to be an integral  `number`
+ *
+ * @param value the value to test.
+ * @throws IllegalArgumentError if given value is not defined, `null` or no integral `number`
+ */
+const isInteger = (value) => {
+    notNull(value);
+    requireValueToBe(
+        () => Number.isInteger(value),
+        () => new IllegalArgumentError(`Given value is integer.`)
+    );
+}
+
+/**
  * Tests given value if it is an instance of the given type using the `instanceof` operator.
  *
  * **Example**
@@ -97,5 +111,6 @@ export {
     isDefined,
     notNull,
     isString,
+    isInteger,
     isInstanceOf
 };
