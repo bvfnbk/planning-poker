@@ -1,4 +1,4 @@
-import {isInstanceOf, isString} from './assertUtilities.js';
+import {isInteger, isString} from './assertUtilities.js';
 
 export default class HttpStatus {
     static OK = new HttpStatus(200, 'OK');
@@ -7,7 +7,7 @@ export default class HttpStatus {
     static INTERNAL_SERVER_ERROR = new HttpStatus(500, 'Internal Server Error');
 
     constructor(status, message) {
-        isInstanceOf(status, HttpStatus);
+        isInteger(status);
         isString(message);
 
         this.httpStatus = status;
