@@ -1,6 +1,6 @@
 # Planning Poker: API
 
-![](https://img.shields.io/badge/Planning_Poker:API_(no_version_yet)-gray)
+![](https://img.shields.io/badge/Planning_Poker:API-0.1.0-green)
 
 This is the API module of the "Planning Poker" application. It consists out of a "Greeting" service and is being built
 into a container.

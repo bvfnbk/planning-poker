@@ -15,6 +15,13 @@ services:
     networks:
       - planning-poker
 
+  api:
+    image: planning-poker-api:0.1.0
+    hostname: api
+    ports:
+      - "8300:8080"
+    networks:
+      - planning-poker
 
   gateway:
     image: planning-poker-gateway:0.2.0
