@@ -17,10 +17,10 @@ const getStatusCode = (error) => {
 /**
  * A RequestHandler
  *
- * @param error
- * @param request
- * @param response
- * @param next
+ * @param error the error.
+ * @param request the HTTP request.
+ * @param response the HTTP response.
+ * @param _ The `next` function (not used)
  */
 const errorHandler = (error, request, response, _) => {
     const httpStatus = getStatusCode(error);
