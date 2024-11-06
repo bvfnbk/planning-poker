@@ -13,7 +13,7 @@ import IllegalArgumentError from "./IllegalArgumentError.js";
  * @param supplierFn The error supplier function.
  */
 const requireValueToBe = (testFn, supplierFn) => {
-    let requirementSatisfied = false;
+    let requirementSatisfied;
     try {
         requirementSatisfied = testFn();
     } catch (error) {

@@ -22,7 +22,7 @@ const getStatusCode = (error) => {
  * @param response
  * @param next
  */
-const errorHandler = (error, request, response, next) => {
+const errorHandler = (error, request, response, _) => {
     const httpStatus = getStatusCode(error);
     response.status(httpStatus.httpStatus).send(JSON.stringify(error));
 };

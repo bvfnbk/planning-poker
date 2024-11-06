@@ -1,3 +1,4 @@
+---
 services:
   signaling:
     image: planning-poker-signaling:0.2.0
