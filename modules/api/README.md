@@ -5,6 +5,14 @@
 This is the API module of the "Planning Poker" application. It consists out of a "Greeting" service and is being built
 into a container.
 
+## Configuration
+
+The service is configured using _environment variables_.
+
+| Variable Name                     | Default Value | Comment                               |
+|-----------------------------------|---------------|---------------------------------------|
+| `PLANNING_POKER_API_SERVICE_PORT` | `8080`        | The port the service is listening on. |
+
 ## Usage
 
 The module can be used _locally_ and via a container.
