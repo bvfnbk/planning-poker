@@ -3,6 +3,7 @@
 ## 0.2.0
 
 - [#18](https://github.com/bvfnbk/planning-poker/issues/18) Shortened modules names.
+- [#13](https://github.com/bvfnbk/planning-poker/issues/13) Added "Hello World" API HTTP REST application module.
 
 ## 0.1.0
 

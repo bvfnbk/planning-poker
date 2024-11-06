@@ -6,6 +6,7 @@ A WebRTC-based, stateless planning poker game. The application consists out of s
 
 ## Modules
 
+- `modules/api`: The API application module.
 - `modules/frontend`: The frontend application module.
 - `modules/gateway`: The gateway application module.
 - `modules/signaling`: A WebSocket signaling service.
@@ -20,6 +21,7 @@ A WebRTC-based, stateless planning poker game. The application consists out of s
 
 Build all application module container images (including their versions) as described in
 
+- [modules/api/README.md](modules/api/README.md)
 - [modules/frontend/README.md](modules/frontend/README.md)
 - [modules/gateway/README.md](modules/gateway/README.md)
 - [modules/signaling/README.md](modules/signaling/README.md)
@@ -37,6 +39,7 @@ Usage: build.sh MODULE VERSION
 
 Where:
     MODULE    : One of
+                    api
                     frontend
                     signaling
                     gateway
@@ -74,6 +77,7 @@ used by default:
 |             |             | `8001`          | `81`            | Websocket                          |
 | `frontend`  | `frontend`  | `8100`          | `80`            | Page                               | 
 | `signaling` | `signaling` | `8200`          | `8080`          | WebSocket                          |
+| `api`       | `api`       | `8300`          | `8080`          | HTTP REST API Service.             |
 
 **Please note:** At the moment it is not possible for the gateway to proxy the signaling service behind the same port as
 the other services. The signaling service is a TCP service which is handled _before_ HTTP which effectively disables the
@@ -85,10 +89,13 @@ HTTP route to the frontend.
 flowchart LR
   Frontend["<code>frontend</code>"]
   Gateway["<code>gateway</code>"]
+  API["<code>api</code>"]
   Client
   Client -- :8000 --> Gateway
   Client -- :8100 --> Frontend
   Gateway -- :80 --> Frontend
+  Gateway -- :8080 --> API
+  Client -- :8300 --> API
 ```
 
 ### Overview: WebSocket (TCP)
