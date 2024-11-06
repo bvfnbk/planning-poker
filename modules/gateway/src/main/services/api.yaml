@@ -1,0 +1,13 @@
+---
+http:
+  routers:
+    api-router-http:
+      entryPoints:
+        - web
+      rule: "PathPrefix(`/api`)"
+      service: api-service-http
+  services:
+    api-service-http:
+      loadBalancer:
+        servers:
+          - url: "http://api:8080/"
