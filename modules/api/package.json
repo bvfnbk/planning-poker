@@ -15,7 +15,7 @@
   "author": "bvfnbk",
   "license": "Apache-2.0",
   "dependencies": {
-    "express": "^5.0.1"
+    "express": "^5.1.0"
   },
   "devDependencies": {
     "jest": "^29.7.0"
